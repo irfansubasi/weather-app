@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 $white-color: #ffffff;
 
 *,
@@ -13,8 +15,10 @@ html{
 }
 
 body{
+    font-family: "Encode Sans Expanded", sans-serif;
     min-height: 100vh;
     color: $white-color;
+    padding: 5rem;
     background-color: #000000;
     position: relative;
     z-index: -1;
