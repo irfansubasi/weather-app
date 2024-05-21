@@ -1,2 +1,2 @@
-body{color:red}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{font-size:16px}body{min-height:100vh;background-color:#fff;background:#000;position:relative}.video-bg{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-1}
 
