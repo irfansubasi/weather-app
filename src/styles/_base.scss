@@ -14,9 +14,12 @@ html{
 
 body{
     min-height: 100vh;
-    background-color: $white-color;
-    background: #000;
+    color: $white-color;
+    background-color: #000000;
     position: relative;
+    z-index: -1;
+    display: flex;
+    flex-direction: column;
 }
 
 .video-bg {
@@ -26,5 +29,15 @@ body{
     width: 100%;
     height: 100%;
     object-fit: cover;
+    z-index: -2;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
     z-index: -1;
 }
