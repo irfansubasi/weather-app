@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 
-function getUTCTime(timezone) {
+function getTime(timezone) {
     
     const now = new Date();
 
@@ -29,4 +29,4 @@ function getUTCTime(timezone) {
     };
 }
 
-export default getUTCTime;
+export default getTime;
