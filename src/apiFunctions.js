@@ -6,6 +6,5 @@ async function getWeatherData(city) {
 }
 
 export default getWeatherData;
-iconSet=icons2
 
 
