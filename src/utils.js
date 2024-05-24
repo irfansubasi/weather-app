@@ -1,32 +1,14 @@
-import { format } from 'date-fns';
+import { addHours, format } from 'date-fns';
+import { UTCDate } from "@date-fns/utc";
 
 function getTime(timezone) {
-    
-    const now = new Date();
+    const utcDate = new UTCDate();
+    const adjusted = addHours(utcDate, timezone);
 
-    const offset = timezone * 1000;
-    const newTime = new Date(now.getTime() + offset);
-    let hours = newTime.getUTCHours();
-    const minutes = newTime.getUTCMinutes();
+    const time = format(adjusted, 'hh:mm aa');
+    const date = format(adjusted, 'dd MMM yyyy');
 
-    let period = 'AM';
-    if (hours >= 12) {
-        period = 'PM';
-    }
-
-    if (hours === 0) {
-        hours = 12;
-    } else if (hours > 12) {
-        hours -= 12;
-    }
-
-    const newUTCTime = hours + ':' + minutes + ' ' + period;
-    const newUTCDate = format(newTime, 'dd MMM yyyy');
-
-    return {
-        time: newUTCTime,
-        date: newUTCDate
-    };
+    return { time, date };
 }
 
 export default getTime;
