@@ -1,29 +1,11 @@
-import { getInputValue } from "./domFunctions";
-
-let lat = 0;
-let lon = 0;
-
-
-
-async function getCoordinates(city) {
-
-    
-    const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=40e8f5b8633d96e1ec7eef7b3da5be90`, {mode: 'cors'});
+async function getWeatherData(city) {
+    const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/next7days?unitGroup=metric&elements=datetime%2Cname%2Caddress%2CresolvedAddress%2Clatitude%2Clongitude%2Ctempmax%2Ctempmin%2Ctemp%2Cfeelslike%2Chumidity%2Cprecipprob%2Cwindspeed%2Cconditions%2Cdescription%2Cicon&iconSet=icons2&include=days%2Ccurrent%2Chours&key=86XF8HBCWDX522TSWSYY4QNG7&contentType=json`, {mode: 'cors'});
     const weatherData = await response.json();
-
-    lat = weatherData[0].lat;
-    lon = weatherData[0].lon;
-    return getWeatherData(lat, lon);
-    
-}
-
-async function getWeatherData(lat, lon) {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=40e8f5b8633d96e1ec7eef7b3da5be90&units=metric`, {mode: 'cors'});
-    const weatherData = await response.json();
+    console.log(weatherData);
     return weatherData;
 }
 
-export default getCoordinates;
-
+export default getWeatherData;
+iconSet=icons2
 
 
