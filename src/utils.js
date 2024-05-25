@@ -11,4 +11,11 @@ function getTime(timezone) {
     return { time, date };
 }
 
-export default getTime;
+async function getIcon(iconName) {
+    const iconPath = `./images/Icons/${iconName}.svg`;
+    const response = await fetch(iconPath);
+    const icon = await response.text();
+    return icon;
+}
+
+export {getTime, getIcon};
