@@ -1,26 +1,53 @@
 import getWeatherData from "./apiFunctions";
 import {getTime, getIcon, getDayName, getBackgroundVideo} from "./utils";
 
+let currentCity = "london";
+let currentUnit = "metric";
+
 function getInputValue(){
     const input = document.querySelector(".search-box");
     const button = document.querySelector(".search-button");
     button.addEventListener("click", function(){
-        renderWeatherInfo(input.value);
-        renderForecast(input.value);
+        renderWeatherInfo(input.value, currentUnit);
+        renderForecast(input.value, currentUnit);
     });
     input.addEventListener("keyup", function(e){
         if(e.key === "Enter"){
-            renderWeatherInfo(input.value);
-            renderForecast(input.value);
+            renderWeatherInfo(input.value, currentUnit);
+            renderForecast(input.value, currentUnit);
         }
     });
 }
 
-async function renderWeatherInfo(city){
+const unitChange = document.querySelector(".unit__change");
+unitChange.addEventListener("click", function(){
+    unitChange.textContent = unitChange.textContent === "Display in °C" ? "Display in °F" : "Display in °C";
+    currentUnit = currentUnit === "metric" ? "us" : "metric";
+    renderWeatherInfo(currentCity, currentUnit);
+    renderForecast(currentCity, currentUnit);
+});
+
+async function renderWeatherInfo(city, unit){
     if(!city){
-        city = "London";
+        city = currentCity;
     }
-    const weatherData = await getWeatherData(city);
+
+    if(!unit){
+        unit = currentUnit;
+    }
+
+    currentCity = city;
+    let unitTemp;
+    let unitSpeed;
+
+    if(unit === "metric"){
+        unitTemp = "°C";
+        unitSpeed = "km/h";
+    }else if(unit === "us"){
+        unitTemp = "°F";
+        unitSpeed = "mph";
+    }
+    const weatherData = await getWeatherData(city, unit);
     const desc = document.querySelector(".weather-info__desc");
     desc.textContent = weatherData.currentConditions.conditions;
 
@@ -31,7 +58,7 @@ async function renderWeatherInfo(city){
     cityName.textContent = weatherData.resolvedAddress;
 
     const temp = document.querySelector(".weather-info__temp");
-    temp.textContent = `${weatherData.currentConditions.temp} °C`;
+    temp.textContent = `${weatherData.currentConditions.temp} ${unitTemp}`;
 
     let timezone = weatherData.tzoffset;
     const date = document.querySelector(".weather-info__date");
@@ -45,7 +72,7 @@ async function renderWeatherInfo(city){
     getBackgroundVideo(weatherData.currentConditions.icon);
 
     const feelsLike = document.querySelector("#feels-like");
-    feelsLike.textContent = `${weatherData.currentConditions.feelslike} °C`;
+    feelsLike.textContent = `${weatherData.currentConditions.feelslike} ${unitTemp}`;
     
     const humidity = document.querySelector("#humidity");
     humidity.textContent = `${weatherData.currentConditions.humidity} %`;
@@ -54,15 +81,27 @@ async function renderWeatherInfo(city){
     chanceOfPrecipitation.textContent = `${weatherData.currentConditions.precipprob} %`;
 
     const wind = document.querySelector("#wind-speed");
-    wind.textContent = `${weatherData.currentConditions.windspeed} km/h`;
+    wind.textContent = `${weatherData.currentConditions.windspeed} ${unitSpeed}`;
 }
 
-async function renderForecast(city){
+async function renderForecast(city, unit){
     if(!city){
-        city = "London";
+        city = currentCity;
+    }
+    if(!unit){
+        unit = currentUnit;
     }
 
-    const weatherData = await getWeatherData(city);
+    currentCity = city;
+    let unitTemp;
+
+    if(unit === "metric"){
+        unitTemp = "°C";
+    }else if(unit === "us"){
+        unitTemp = "°F";
+    }
+
+    const weatherData = await getWeatherData(city, unit);
 
     const forecast = document.querySelector(".forecast");
     forecast.innerHTML = "";
@@ -84,11 +123,11 @@ async function renderForecast(city){
 
         const maxTemp = document.createElement("span");
         maxTemp.classList.add("forecast-daily__temp-high");
-        maxTemp.textContent = `${weatherData.days[i].tempmax} °C`;
+        maxTemp.textContent = `${weatherData.days[i].tempmax} ${unitTemp}`;
 
         const minTemp = document.createElement("span");
         minTemp.classList.add("forecast-daily__temp-low");
-        minTemp.textContent = `${weatherData.days[i].tempmin} °C`;
+        minTemp.textContent = `${weatherData.days[i].tempmin} ${unitTemp}`;
 
         temp.appendChild(maxTemp);
         temp.appendChild(minTemp);

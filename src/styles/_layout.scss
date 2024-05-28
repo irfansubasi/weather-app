@@ -11,6 +11,10 @@ main{
         border-radius: 2rem;
         max-width: 25rem;
 
+        &__unit{
+            cursor: pointer;
+        }
+
         &__error{
             color: #FF0000;
             font-size: 1.2rem;
