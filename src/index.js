@@ -1,5 +1,6 @@
 import "./styles/main.scss";
-import { renderWeatherInfo, getInputValue } from "./domFunctions";
+import { renderWeatherInfo, renderForecast,getInputValue } from "./domFunctions";
 
 getInputValue();
 renderWeatherInfo();
+renderForecast();
