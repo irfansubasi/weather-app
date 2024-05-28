@@ -44,4 +44,10 @@ function getBackgroundVideo(iconName) {
     video.load();
 }
 
-export {getTime, getIcon, getDayName, getBackgroundVideo};
+function errorMessage(){
+    const errorDiv = document.querySelector(".weather-info__error");
+    errorDiv.style.display = "block";
+    errorDiv.textContent = "City not found! Please type a valid city name.";
+}
+
+export {getTime, getIcon, getDayName, getBackgroundVideo, errorMessage};
