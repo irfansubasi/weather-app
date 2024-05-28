@@ -1,6 +1,7 @@
 main{
     display: flex;
     justify-content: space-between;
+    margin-bottom: 1rem;
 }
 
 .weather{
@@ -140,4 +141,60 @@ main{
     }
 
     
+}
+
+@media (max-width: 1000px){
+    html{
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 865px){
+    html{
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 650px){
+    html{
+        font-size: 10px;
+    }
+
+    .forecast{
+
+        flex-direction: column;
+
+        &-daily{
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+
+            &__temp{
+                align-items: end;
+            }
+        }
+    }
+}
+
+@media (max-width: 540px){
+    html{
+        font-size: 8px;
+    }
+
+    body{
+        padding: 2rem;
+    }
+
+    .weather{
+        &-info{
+            padding: 1.5rem;
+            max-width: 45%;
+        }
+
+        &-details-container{
+            padding: 1.5rem;
+            max-width: 45%;
+        }
+        
+    }
 }
