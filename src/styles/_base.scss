@@ -18,11 +18,12 @@ body{
     font-family: "Encode Sans Expanded", sans-serif;
     min-height: 100vh;
     color: $white-color;
-    padding: 5rem;
+    padding: 2.5rem;
     background-color: #000000;
     position: relative;
     z-index: -1;
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
 }
 
